@@ -7,10 +7,9 @@
     [
       "spark-submit",
       "--deploy-mode", "cluster",
-      "--class", "ProcessData",
-      "s3://spark-getting-started-bkt/jars/spark-getting-startedartfid-1.0-SNAPSHOT.jar",
-      "s3://spark-getting-started-bkt/input-file.csv",
-      "s3://spark-getting-started-bkt/output-file.txt"
+      "--master", "yarn",
+      "--class", "SparkAppMain",
+      "s3://spark-getting-started-bkt/jars/spark-getting-startedartfid-1.0-SNAPSHOT.jar"
     ],
     "ActionOnFailure": "TERMINATE_CLUSTER"
   }

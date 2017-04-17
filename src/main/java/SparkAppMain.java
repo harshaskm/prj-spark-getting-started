@@ -1,10 +1,15 @@
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.api.java.function.FlatMapFunction;
+import scala.Tuple1;
+import scala.Tuple2;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by harsha on 03/04/2017.
@@ -15,16 +20,17 @@ public class SparkAppMain {
         String inputLine = null;
         String outputFileName = args[1];
 
-        BufferedWriter out = new BufferedWriter(new FileWriter(outputFileName));
+      //  BufferedWriter out = new BufferedWriter(new FileWriter(outputFileName));
 
         SparkConf sparkConf = new SparkConf()
                 .setAppName("Example Spark App")
-                //.setMaster("local[*]")  // Delete this line when submitting to a cluster
                 ;
         JavaSparkContext sparkContext = new JavaSparkContext(sparkConf);
         JavaRDD<String> stringJavaRDD = sparkContext.textFile(inputFileName);
-        inputLine = "Number of lines in file = " + stringJavaRDD.count();
-        out.write(inputLine);
-        out.close();
+
+        JavaRDD<Long> outputRDD = sparkContext.parallelize(Arrays.asList(stringJavaRDD.count()));
+        outputRDD.coalesce(1).saveAsTextFile(outputFileName);
+
+        System.out.println("HelloWorld");
     }
 }

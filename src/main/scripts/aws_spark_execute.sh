@@ -3,7 +3,7 @@ aws emr create-cluster \
     --ec2-attributes \
       KeyName=aws_online_first_key_pair \
     --enable-debugging \
-    --log-uri s3://spark-getting-started-bkt \
+    --log-uri s3://spark-getting-started-bkt/aws-emr-logs \
     --instance-type m3.xlarge \
     --release-label emr-4.1.0 \
     --instance-count 1 \

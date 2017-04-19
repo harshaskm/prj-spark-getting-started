@@ -43,6 +43,6 @@ aws emr create-cluster \
 	--log-uri 's3n://'"$S3_BKT_NAME"'/aws-emr-logs/' \
 	--steps file://step.json \
 	--instance-groups InstanceCount=1,InstanceGroupType=MASTER,InstanceType=m3.xlarge,Name=MASTER  \
-	--termination-protected \
+	--auto-terminate \
 	--region $AWS_REGION
 

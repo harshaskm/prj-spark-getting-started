@@ -52,7 +52,9 @@ echo ========================-----=========================
 echo ========================-----=========================
 echo	About to execute Maven build
 echo ========================-----=========================
-	mvn install
+	# I am commenting this line, because I have already uploaded the required Jar file to github
+	# If there is a change made to the spark application, only then this step is required
+	#mvn install
 
 echo ========================-----=========================
 echo	Copy generated snapshot Jar file from target folder to s3 bucket

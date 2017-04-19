@@ -40,7 +40,7 @@ aws emr create-cluster \
 	--service-role EMR_DefaultRole \
 	--enable-debugging \
 	--release-label emr-5.4.0 \
-	--log-uri 's3n://spark-getting-started-bkt/aws-emr-logs/' \
+	--log-uri 's3n://'"$S3_BKT_NAME"'/aws-emr-logs/' \
 	--steps file://step.json \
 	--instance-groups InstanceCount=1,InstanceGroupType=MASTER,InstanceType=m3.xlarge,Name=MASTER  \
 	--termination-protected \

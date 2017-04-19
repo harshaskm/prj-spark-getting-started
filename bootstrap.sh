@@ -60,6 +60,12 @@ echo ========================-----=========================
 	aws s3 cp target/$JARNAME s3://$S3_BKT_NAME/jars/$JARNAME
 
 echo ========================-----=========================
+echo	Initiate emr cluster creation and task execution
+echo ========================-----=========================
+	cd src/main/scripts
+	./aws_spark_execute.sh
+
+echo ========================-----=========================
 echo	Finished script execution
 echo ========================-----=========================
 

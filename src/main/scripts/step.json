@@ -10,9 +10,9 @@
       "--deploy-mode", "cluster",
       "--master", "yarn",
       "--class", "SparkAppMain",
-      "s3://spark-getting-started-bkt/jars/spark-getting-startedartfid-1.0-SNAPSHOT.jar",
-      "s3://spark-getting-started-bkt/nationalparks.csv",
-      "s3://spark-getting-started-bkt/emr_output"
+      "s3://spark-getting-started-bkt-harsha/jars/spark-getting-startedartfid-1.0-SNAPSHOT.jar",
+      "s3://spark-getting-started-bkt-harsha/nationalparks.csv",
+      "s3://spark-getting-started-bkt-harsha/emr_output"
     ],
     "ActionOnFailure": "TERMINATE_CLUSTER"
   }

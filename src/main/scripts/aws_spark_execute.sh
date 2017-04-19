@@ -1,15 +1,64 @@
+# ========================-----=========================
+#
+# Execute this script to initiate launching of an AWS EMR
+#	Do familiarize yourself with the different config arrangements made
+#
+# ========================-----=========================
+
+
+# ========================-----=========================
+# Since environment variables are used in the bootstrap.sh in the parent folder
+#   Of this project, I have chosen to create the .env file in the parent folder
+#   Which reason I am referring to the file using ../../../ linux file notation
+	source ../../../.env
+
+echo ------------------------------------------------------
+echo --Verify the value in the env variables
+	echo $S3_BKT_NAME
+	echo $AWS_KEY_PAIR
+echo --end of verification
+echo ------------------------------------------------------
+
+# ========================-----=========================
+# Following lines are to find replace text in the step.json file so as to
+#   use use values from the environment variables defined in ../../../.env file
+	cat step_template.json | sed "s/S3_BKT_NAME/$S3_BKT_NAME/g" > temp.json
+	cat temp.json > step.json
+	cat step.json | sed "s/JARNAME/$JARNAME/g" > temp.json
+	cat temp.json > step.json
+	cat step.json | sed "s/INPUTFILE/$INPUTFILE/g" > temp.json
+	cat temp.json > step.json
+	cat step.json | sed "s/OUTPUTFILE/$OUTPUTFILE/g" > temp.json
+	cat temp.json > step.json
+	rm temp.json
+# ========================-----=========================
+
+#aws emr create-cluster \
+#    --name "Sample Spark Cluster" \
+#    --ec2-attributes \
+#      KeyName=$AWS_KEY_PAIR \
+#    --enable-debugging \
+#    --log-uri s3://$S3_BKT_NAME/$AWS_EMR_LOG_FOLDER \
+#    --instance-type m3.xlarge \
+#    --release-label emr-5.4.0 \
+#    --instance-count 1 \
+#    --use-default-roles \
+#    --applications Name=Spark \
+#    --steps file://step.json \
+#    --configurations file://./aws_spark_yarn_logging.json \
+#    --termination-protected \
+#    --region $AWS_REGION
+
 aws emr create-cluster \
-    --name "Sample Spark Cluster with a single Job" \
-    --ec2-attributes \
-      KeyName=aws_online_first_key_pair \
-    --enable-debugging \
-    --log-uri s3://spark-getting-started-bkt/aws-emr-logs \
-    --instance-type m3.xlarge \
-    --release-label emr-4.1.0 \
-    --instance-count 1 \
-    --use-default-roles \
-    --applications Name=Spark \
-    --steps file://step.json \
-    --configurations file://./aws_spark_yarn_logging.json \
-    --termination-protected
+	--name 'Test afresh' \
+	--applications Name=Hadoop Name=Spark \
+	--ec2-attributes KeyName=$AWS_KEY_PAIR,InstanceProfile=EMR_EC2_DefaultRole,AvailabilityZone=$AWS_AVAIL_ZONE \
+	--service-role EMR_DefaultRole \
+	--enable-debugging \
+	--release-label emr-5.4.0 \
+	--log-uri 's3n://spark-getting-started-bkt/aws-emr-logs/' \
+	--steps file://step.json \
+	--instance-groups InstanceCount=1,InstanceGroupType=MASTER,InstanceType=m3.xlarge,Name=MASTER  \
+	--termination-protected \
+	--region $AWS_REGION
 

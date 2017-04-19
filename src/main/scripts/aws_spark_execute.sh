@@ -33,22 +33,6 @@ echo ------------------------------------------------------
 	rm temp.json
 # ========================-----=========================
 
-#aws emr create-cluster \
-#    --name "Sample Spark Cluster" \
-#    --ec2-attributes \
-#      KeyName=$AWS_KEY_PAIR \
-#    --enable-debugging \
-#    --log-uri s3://$S3_BKT_NAME/$AWS_EMR_LOG_FOLDER \
-#    --instance-type m3.xlarge \
-#    --release-label emr-5.4.0 \
-#    --instance-count 1 \
-#    --use-default-roles \
-#    --applications Name=Spark \
-#    --steps file://step.json \
-#    --configurations file://./aws_spark_yarn_logging.json \
-#    --termination-protected \
-#    --region $AWS_REGION
-
 aws emr create-cluster \
 	--name 'Test afresh' \
 	--applications Name=Hadoop Name=Spark \

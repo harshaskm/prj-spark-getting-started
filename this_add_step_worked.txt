@@ -1,4 +1,0 @@
-aws emr add-steps \
---cluster-id j-2RQYD5OJXE147 \
---steps '[{"Args":["spark-submit","--deploy-mode","cluster","--master","yarn","--class","SparkAppMain","s3://spark-getting-started-bkt/jars/spark-getting-startedartfid-1.0-SNAPSHOT.jar", "s3://spark-getting-started-bkt/nationalparks.csv", "s3://spark-getting-started-bkt/output"],"Type":"CUSTOM_JAR","ActionOnFailure":"CONTINUE","Jar":"command-runner.jar","Properties":"","Name":"Spark application"}]'
-

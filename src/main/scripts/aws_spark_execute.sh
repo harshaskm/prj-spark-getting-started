@@ -36,8 +36,8 @@ echo ------------------------------------------------------
 aws emr create-cluster \
 	--name 'Test afresh' \
 	--applications Name=Hadoop Name=Spark \
-	--ec2-attributes KeyName=$AWS_KEY_PAIR,InstanceProfile=EMR_EC2_DefaultRole,AvailabilityZone=$AWS_AVAIL_ZONE \
-	--service-role EMR_DefaultRole \
+	--ec2-attributes AvailabilityZone=$AWS_AVAIL_ZONE \
+	--use-default-roles \
 	--enable-debugging \
 	--release-label emr-5.4.0 \
 	--log-uri 's3n://'"$S3_BKT_NAME"'/aws-emr-logs/' \

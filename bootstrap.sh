@@ -64,6 +64,7 @@ echo ========================-----=========================
 echo ========================-----=========================
 echo	Initiate emr cluster creation and task execution
 echo ========================-----=========================
+	aws emr create-default-roles
 	cd src/main/scripts
 	./aws_spark_execute.sh
 

@@ -14,7 +14,7 @@ pre requisites:
       https://aws.amazon.com/free
 
    Now that you have done creating an account, proceed to capture required information to be able to use AWS CLI to work with AWS console:
-      1. Follow this post
+   1. Follow this post
          https://www.cloudberrylab.com/blog/how-to-find-your-aws-access-key-id-and-secret-access-key-and-register-with-cloudberry-s3-explorer/
 
 Now, You are all set to execute the bootstrap.sh to create your EMR and generate the output.

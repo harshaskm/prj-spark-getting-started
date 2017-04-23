@@ -1,15 +1,37 @@
 # prj-spark-getting-started
-Learning spark by writing a Java application
+Learning spark by writing an application
 
-This is a java program to count number of lines in a given file
-How to build the required jar file:
-   cd ~/IdeaProjects/prj-spark-getting-started$> mvn install
-The above command will generate a jar file named: spark-getting-startedartfid-1.0-SNAPSHOT.jar
-In the folder: ~/IdeaProjects/prj-spark-getting-started/target
+A simple program to count number of lines in a given file
 
-This Java program exepects a command line argument, which is actually the path and the file name, contents of which are to be processed to count number of lines.
-Here is how the jar file can be executed as a spark job locally:
-   /usr/local/bin/spark-submit --master local[*] --class SparkAppMain target/spark-getting-startedartfid-1.0-SNAPSHOT.jar /tmp/nationalparks.csv
+In the root folder of this project there is a file named bootstrap.sh (a shell script).
+All you have to do is to execute the same (if this is the first time you are using this application).
 
-NOTE: Remember to create a file in the /tmp folder with above name nationalparks.csv
-Containing atleast few lines of text
+pre requisites:
+   1. You have required access to connect to AWS console
+   2. This application assumes that you have configured the required credentials to use AWS console and be able to create resources on the same
+
+   Do you already have an account to use AWS console? If not, create one here:
+      https://aws.amazon.com/free
+
+   Now that you have done creating an account, proceed to capture required information to be able to use AWS CLI to work with AWS console:
+      1. Follow this post
+         https://www.cloudberrylab.com/blog/how-to-find-your-aws-access-key-id-and-secret-access-key-and-register-with-cloudberry-s3-explorer/
+
+Now, You are all set to execute the bootstrap.sh to create your EMR and generate the output.
+What does the bootstrap.sh do?
+   1. Creates a S3 bucket
+   2. Copies over:
+      a. Jar file (the application)
+      b. Input file (the file, whose number of lines will be counted by the application)
+   3. Instantiates an AWS EMR
+      a. There is all the required AWS CLI required to create a particular type of (low power) EMR
+      b. Execute the application
+      c. Capture the output of the same on the S3 bucket (created earlier)
+      d. Capture all the EMR log files on S3 for future reference
+      e. Terminate EMR and related resources used for the exercise
+
+NOTE:
+   Ensure from AWS console EC2 Dashboard and Billing screen that all the resources that were instantiated for this exercise were terminated successfully (This application is designed to terminate it all, but it helps to just ensure that there were no hurdles and that the teardown was successful)
+   Also, please do delete the bucket.
+   Concern is that you should not get billed for resources that you will not want to use.
+   Also, please remember that the billing screen reflects real stats only after few hours (this does not reflect immediately).

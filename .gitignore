@@ -8,3 +8,5 @@ build
 generated/
 dump.rdb
 classes/
+*/.idea/workspace.xml
+*/.idea/tasks.xml

@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="prj-spark-getting-started" target="1.5" />
+      <module name="prj-spark-getting-started" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

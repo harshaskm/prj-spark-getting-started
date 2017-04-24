@@ -2,3 +2,21 @@ aws emr add-steps \
 --cluster-id j-2RQYD5OJXE147 \
 --steps '[{"Args":["spark-submit","--deploy-mode","cluster","--master","yarn","--class","SparkAppMain","s3://spark-getting-started-bkt/jars/spark-getting-startedartfid-1.0-SNAPSHOT.jar", "s3://spark-getting-started-bkt/nationalparks.csv", "s3://spark-getting-started-bkt/output"],"Type":"CUSTOM_JAR","ActionOnFailure":"CONTINUE","Jar":"command-runner.jar","Properties":"","Name":"Spark application"}]'
 
+This works:
+I have been able to create a cluster, define the step and get the spark code run in cluster mode, successfully
+
+aws emr create-cluster \
+--applications \
+     Name=Hadoop \
+     Name=Spark \
+--ec2-attributes '{"InstanceProfile":"EMR_EC2_DefaultRole","SubnetId":"subnet-acb793c8","EmrManagedSlaveSecurityGroup":"sg-9adeadfd","EmrManagedMasterSecurityGroup":"sg-95dfacf2","KeyName":"aws_online_first_key_pair"}' \
+--service-role EMR_DefaultRole \
+--enable-debugging \
+--release-label emr-5.4.0 \
+--log-uri 's3n://spark-getting-started-bkt/aws-emr-logs/' \
+--steps '[{"Args":["spark-submit","--deploy-mode","cluster","--master","yarn","--class","SparkAppMain","s3://spark-getting-started-bkt/jars/spark-getting-startedartfid-1.0-SNAPSHOT.jar", "s3://spark-getting-started-bkt/nationalparks.csv", "s3://spark-getting-started-bkt/output"],"Type":"CUSTOM_JAR","ActionOnFailure":"CONTINUE","Jar":"command-runner.jar","Properties":"","Name":"Spark application"}]' \
+--name 'Test afresh' \
+--instance-groups '[{"InstanceCount":1,"InstanceGroupType":"MASTER","InstanceType":"m3.xlarge","Name":"Master Instance Group"}]' \
+--termination-protected \
+--region ap-southeast-1
+

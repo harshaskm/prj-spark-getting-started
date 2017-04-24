@@ -1,7 +1,7 @@
 # prj-spark-getting-started
 Learning spark by writing an application
 
-A simple program to count number of lines in a given file
+A simple program to perform word count in a given file
 
 In the root folder of this project there is a file named bootstrap.sh (a shell script).
 All you have to do is to execute the same (if this is the first time you are using this application).
@@ -13,16 +13,16 @@ pre requisites:
    Do you already have an account to use AWS console? If not, create one here:
       https://aws.amazon.com/free
 
-   Now that you have done creating an account, proceed to capture required information to be able to use AWS CLI to work with AWS console:
+   Now that you are done creating an account/or you already have one, proceed to capture required information to be able to use AWS CLI to work with AWS console:
    1. Follow this post
          https://www.cloudberrylab.com/blog/how-to-find-your-aws-access-key-id-and-secret-access-key-and-register-with-cloudberry-s3-explorer/
 
-Now, You are all set to execute the bootstrap.sh to create your EMR and generate the output.
+You are all set to execute the bootstrap.sh to create your EMR and generate the output.
 What does the bootstrap.sh do?
    1. Creates a S3 bucket
    2. Copies over:
       a. Jar file (the application)
-      b. Input file (the file, whose number of lines will be counted by the application)
+      b. Input file (the file, which will be used to generate a key-value pair of word count)
    3. Instantiates an AWS EMR
       a. There is all the required AWS CLI required to create a particular type of (low power) EMR
       b. Execute the application

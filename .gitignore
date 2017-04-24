@@ -1,0 +1,10 @@
+*.class
+*.ipr
+*.iws
+.idea
+.gradle
+build
+*.iml
+generated/
+dump.rdb
+classes/
